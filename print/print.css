@@ -1,0 +1,119 @@
+/* Utskrift: en sida per A4-ark (210 x 297 mm) */
+@page { size: A4; margin: 0; }
+
+:root { --pager-space: 0px; }
+
+html, body {
+  height: auto;
+  overflow: visible;
+  background: #FFFFFF;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+body { overflow: visible; counter-reset: sida; }
+
+.deck {
+  position: static;
+  display: block;
+  overflow: visible;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+.slide {
+  counter-increment: sida;
+  position: relative;
+  display: block;
+  flex: none;
+  width: 210mm;
+  height: 296.5mm;
+  overflow: hidden;
+  scroll-snap-align: none;
+  break-after: page;
+  page-break-after: always;
+  break-inside: avoid;
+}
+.slide:last-child { break-after: auto; page-break-after: auto; }
+
+.slide:not(.slide--cover)::after {
+  content: counter(sida);
+  position: absolute;
+  right: 16mm;
+  bottom: 9mm;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.page {
+  max-width: none;
+  margin: 0;
+  padding: 14mm 16mm 18mm 16mm;
+}
+
+/* Omslag */
+.slide--cover { display: block; }
+.cover { width: 210mm; height: 296.5mm; }
+.cover__parody { bottom: 14mm; }
+
+/* Textsidor: lite tätare så att varje sida ryms på ett ark */
+.points li { padding: 9px 0 10px; font-size: 13px; line-height: 1.45; }
+.points strong { font-size: 14px; }
+.lead { font-size: 16px; line-height: 1.45; }
+.intro__sub { margin-top: 22px; font-size: 21px; }
+.dnr__title { margin-top: 24px; }
+.dnr li { padding: 6px 0; font-size: 12.5px; line-height: 1.35; }
+.asks li { padding: 10px 0; }
+.ask__story { font-size: 16px; line-height: 1.5; }
+.ask__close { margin-top: 20px; }
+.ctas { margin-top: 20px; }
+.contact { margin-top: 16px; }
+
+a { text-decoration: underline; }
+.cta { text-decoration: none; }
+
+/* Tätare layout för de två textsidorna */
+.page { padding: 12mm 16mm 17mm 16mm; }
+.ask__title { max-width: none; font-size: 42px; margin-top: 10px; }
+.ask__lead { max-width: none; font-size: 26px; margin-top: 12px; }
+.ask__story { margin-top: 12px; font-size: 15px; line-height: 1.45; }
+.asks { margin-top: 18px; }
+.asks li { padding: 8px 0; font-size: 16.5px; line-height: 1.28; }
+.ask__close { margin-top: 16px; padding-top: 14px; font-size: 26px; }
+.ctas { margin-top: 16px; gap: 12px; }
+.cta { padding: 12px; min-height: 0; gap: 14px; }
+.cta img { width: 92px; height: 92px; }
+.cta__title { font-size: 19px; }
+.cta__text { font-size: 13.5px; line-height: 1.35; }
+.sources { margin-top: 10px; font-size: 12px; }
+.intro__title { max-width: none; font-size: 38px; margin-top: 10px; }
+.lead { margin-top: 12px; }
+.source { font-size: 12.5px; }
+.footnote { font-size: 12px; }
+.contact { margin-top: 12px; font-size: 14px; }
+.dnr li { padding: 5px 0; }
+.points li { padding: 8px 0 9px; }
+
+/* Utnyttja arkets höjd */
+.photo { aspect-ratio: 337 / 322; }
+.card--big .photo { aspect-ratio: 698 / 424; }
+.cards--two .card--big .photo { aspect-ratio: 698 / 404; }
+
+/* Argumentsidan: lite större text där det finns plats */
+.ask__story { font-size: 16.5px; max-width: none; }
+.asks li { font-size: 17.5px; padding: 9px 0; }
+.ask__close { font-size: 27px; }
+.cta__text { font-size: 14px; }
+.sources { font-size: 12.5px; }
+
+/* Slutsidan */
+.points li { font-size: 13.5px; }
+.points strong { font-size: 14.5px; }
+.source { font-size: 13px; }
+.footnote { font-size: 12.5px; }
+.cards--two .card--big .photo { aspect-ratio: 698 / 372; }
+.points li { font-size: 13.2px; }
+.ask__lead { font-size: 28px; }
+.ask__story { font-size: 17px; }
+.asks li { font-size: 18.5px; padding: 11px 0; }
+.cta img { width: 100px; height: 100px; }

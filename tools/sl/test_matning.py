@@ -63,6 +63,13 @@ class Sammanfatta(unittest.TestCase):
         self.assertEqual(m.sammanfatta({"journeys": [{"tripDuration": 600, "legs": []}]}, NU)[1], "tolkningsfel: resan saknar delsträckor")
 
 
+class Avrundning(unittest.TestCase):
+    def test_inget_minus_noll_och_negativt_behalls(self):
+        self.assertEqual(str(m.min1(-1.2)), "0.0")
+        self.assertEqual(m.min1(-6.8 * 60), -6.8)
+        self.assertEqual(m.min1(None), "")
+
+
 class Text(unittest.TestCase):
     def test_formeltecken_och_radbrytningar(self):
         self.assertEqual(m.text("=HYPERLINK(1)"), "'=HYPERLINK(1)")

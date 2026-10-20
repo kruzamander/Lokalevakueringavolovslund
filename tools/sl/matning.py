@@ -93,7 +93,7 @@ def realtid(resa):
 
 
 def min1(sekunder):
-    return round(sekunder / 60, 1) if sekunder is not None else ""
+    return round(sekunder / 60, 1) + 0.0 if sekunder is not None else ""   # + 0.0 gör -0.0 till 0.0
 
 
 def ben_info(ben):

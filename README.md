@@ -5,10 +5,14 @@ vardagar 06:30–09:00 och 14:00–17:30 svensk tid (`tools/sl/matning.py`).
 
 **Vad som mäts.** SL:s öppna reseplanerare (Trafiklab Journey-planner v2) tillfrågas om en resa med *enbart buss*
 från Olovslundsskolan till respektive skola, avgång "nu". Planeraren returnerar högst tre resor. Raden beskriver
-den snabbaste av dem, och `forsta_resan_min_realtid` är den först avgående resan.
+den snabbaste av dem.
 
 **Det är planerade tider med realtidsuppdateringar, inte faktiskt uppmätta restider.** Mätningen visar vad en
 resenär som frågar SL får veta, inte hur lång tid resan verkligen tog.
+
+**Det gäller SL:s ordinarie busstrafik.** Om förvaltningen i stället ordnar egen skolbussning (egna bussar, andra
+hållplatser och körvägar) syns den inte här. Därför visar `gang_min` hur långt en resenär måste gå med SL, och
+`buss_min` är den tid man sitter på bussen.
 
 | Kolumn | Betydelse |
 |---|---|
@@ -22,7 +26,6 @@ resenär som frågar SL får veta, inte hur lång tid resan verkligen tog.
 | `linjer` | bussnummer |
 | `pa_hallplats`, `av_hallplats` | hållplats där man stiger på respektive av |
 | `avgang_lokal`, `ankomst_lokal` | avgång och ankomst (svensk tid) |
-| `forsta_resan_min_realtid` | den först avgående av de föreslagna resornas totaltid |
 | `antal_resor` | hur många resor SL returnerade (0–3) |
 | `status` | `ok`, `inga bussresor` eller felmeddelande. Felrader sparas med flit |
 

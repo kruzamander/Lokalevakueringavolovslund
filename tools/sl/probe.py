@@ -1,49 +1,69 @@
-"""Utforskar SL:s reseplanerare (Trafiklab Journey-planner v2) från GitHub-runnern.
-Skriver råsvar till loggen så att mätskriptet kan byggas på verkliga fältnamn."""
-import json, sys, urllib.parse, urllib.request, urllib.error
+"""Utforskar SL:s reseplanerare (Trafiklab Journey-planner v2) från GitHub-runnern, del 2: resor."""
+import json, urllib.parse, urllib.request, urllib.error
 
 BASE = "https://journeyplanner.integration.sl.se/v2"
 UA = {"User-Agent": "olovslund-matning/0.1 (foraldragrupp; kontakt olovslundsskolanforaldrar@gmail.com)", "Accept": "application/json"}
+POI = {
+    "Olovslundsskolan": "poiID:40001370:33001080:-1:Olovslundsskolan:Stockholm:Olovslundsskolan:ANY:POI:1996876:3747547:MRCV:slt",
+    "Vällingbyskolan": "poiID:40000879:33001080:-1:Vällingbyskolan:Stockholm:Vällingbyskolan:ANY:POI:1990608:3740617:MRCV:slt",
+    "Abrahamsbergsskolan": "poiID:40001529:33001080:-1:Abrahamsbergsskolan:Stockholm:Abrahamsbergsskolan:ANY:POI:1998198:3746838:MRCV:slt",
+    "Norra Ängby skola": "poiID:40001186:33001080:-1:Norra Ängby skola:Stockholm:Norra Ängby skola:ANY:POI:1993557:3743705:MRCV:slt",
+}
 
 
-def get(path, params, show=1500):
+def get(path, params):
     url = f"{BASE}/{path}?" + urllib.parse.urlencode(params, safe=":[]|.")
-    print("\n>>> GET", url)
     try:
-        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30) as r:
-            body = r.read().decode("utf-8")
-            print("HTTP", r.status, r.headers.get("content-type"), len(body), "byte")
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=40) as r:
+            return json.loads(r.read().decode("utf-8")), url
     except urllib.error.HTTPError as e:
-        print("HTTP-fel", e.code, e.read()[:600])
-        return None
+        return {"HTTPFEL": e.code, "body": e.read()[:500].decode("utf-8", "replace")}, url
     except Exception as e:
-        print("Fel", repr(e)); return None
-    try:
-        data = json.loads(body)
-    except Exception:
-        print(body[:show]); return None
-    return data
+        return {"FEL": repr(e)}, url
 
 
-NAMES = ["Olovslundsskolan", "Penninglandet 2, Bromma", "Vällingbyskolan", "Abrahamsbergsskolan", "Norra Ängby skola",
-         "Nya Elementar", "Äppelviksskolan", "Ålstensskolan", "Åkeshovsvägen 7, Bromma"]
-for nm in NAMES:
-    for flt in ("46", None):
-        p = {"name_sf": nm, "type_sf": "any"}
-        if flt: p["any_obj_filter_sf"] = flt
-        d = get("stop-finder", p)
-        if not d: continue
-        locs = d.get("locations") or d.get("stopFinder", {}).get("points") or []
-        print(f"  [{nm}] filter={flt}: {len(locs)} träffar; nycklar: {list(d.keys())}")
-        for l in locs[:5]:
-            print("   ", json.dumps({k: l.get(k) for k in ("id", "name", "disassembledName", "type", "coord", "isBest", "matchQuality")}, ensure_ascii=False))
+def summarize(d):
+    if "journeys" not in d:
+        return json.dumps(d, ensure_ascii=False)[:600]
+    out = []
+    for j in d["journeys"]:
+        legs = []
+        for l in j.get("legs", []):
+            t = l.get("transportation", {}) or {}
+            pr = t.get("product", {}) or {}
+            legs.append(f'{pr.get("class")}/{pr.get("name")}/{t.get("disassembledName") or t.get("name")}:{l.get("duration")}s')
+        out.append(f'  tripDuration={j.get("tripDuration")} tripRtDuration={j.get("tripRtDuration")} byten={j.get("interchanges")} :: ' + " | ".join(legs))
+    return "\n".join(out)
 
-# en rå resa som exempel
-d = get("trips", {"type_origin": "any", "name_origin": "Olovslundsskolan", "type_destination": "any", "name_destination": "Vällingbyskolan",
-                  "calc_number_of_trips": 3, "language": "sv"}, show=3000)
-if d:
-    print(json.dumps(d, ensure_ascii=False)[:7000])
-    for j in d.get("journeys", []):
-        legs = j.get("legs", [])
-        print("RESA", j.get("tripDuration"), "s,", len(legs), "ben:",
-              [(l.get("transportation", {}).get("product", {}).get("name"), l.get("transportation", {}).get("disassembledName"), l.get("duration")) for l in legs])
+
+o = POI["Olovslundsskolan"]
+# 1) rå struktur för en resa
+d, url = get("trips", {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI["Vällingbyskolan"],
+                       "calc_number_of_trips": 3, "language": "sv"})
+print(">>>", url)
+print("nycklar:", list(d.keys()))
+if d.get("journeys"):
+    print(json.dumps(d["journeys"][0], ensure_ascii=False)[:5500])
+print(summarize(d))
+
+# 2) varianter för att få bara buss
+variants = {
+    "grund": {},
+    "incl_mot_5": {"incl_mot_5": "true"},
+    "inclMOT_5": {"inclMOT_5": "true"},
+    "excl_mot": {"excl_mot_1": "true", "excl_mot_2": "true", "excl_mot_3": "true", "excl_mot_4": "true"},
+    "excludedMeans": {"excluded_means": "checkbox", "excl_mot_1": "1", "excl_mot_2": "1", "excl_mot_4": "1"},
+    "leasttime": {"route_type": "leasttime"},
+}
+for name, extra in variants.items():
+    p = {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI["Vällingbyskolan"], "calc_number_of_trips": 5, "language": "sv"}
+    p.update(extra)
+    d, url = get("trips", p)
+    print(f"\n### variant {name}: {url[-160:]}")
+    print(summarize(d))
+
+# 3) övriga mål med grundparametrar
+for nm in ("Abrahamsbergsskolan", "Norra Ängby skola"):
+    d, url = get("trips", {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI[nm], "calc_number_of_trips": 3, "language": "sv"})
+    print(f"\n### mål {nm}")
+    print(summarize(d))

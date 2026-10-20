@@ -37,33 +37,19 @@ def summarize(d):
 
 
 o = POI["Olovslundsskolan"]
-# 1) rå struktur för en resa
-d, url = get("trips", {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI["Vällingbyskolan"],
-                       "calc_number_of_trips": 3, "language": "sv"})
-print(">>>", url)
-print("nycklar:", list(d.keys()))
-if d.get("journeys"):
-    print(json.dumps(d["journeys"][0], ensure_ascii=False)[:5500])
-print(summarize(d))
-
-# 2) varianter för att få bara buss
+# varianter för att få bara buss (calc_number_of_trips får vara högst 3)
 variants = {
     "grund": {},
-    "incl_mot_5": {"incl_mot_5": "true"},
-    "inclMOT_5": {"inclMOT_5": "true"},
-    "excl_mot": {"excl_mot_1": "true", "excl_mot_2": "true", "excl_mot_3": "true", "excl_mot_4": "true"},
-    "excludedMeans": {"excluded_means": "checkbox", "excl_mot_1": "1", "excl_mot_2": "1", "excl_mot_4": "1"},
-    "leasttime": {"route_type": "leasttime"},
+    "incl_mot_5=true": {"incl_mot_5": "true"},
+    "incl_mot_5=1": {"incl_mot_5": "1"},
+    "incl_mot=5": {"incl_mot": "5"},
+    "excl_mot_2,1,4": {"excl_mot_1": "true", "excl_mot_2": "true", "excl_mot_4": "true"},
+    "excl_mot_0..4,6..11": {f"excl_mot_{i}": "true" for i in (0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11)},
+    "product_class": {"incl_mot_5": "true", "excl_mot_2": "true"},
 }
 for name, extra in variants.items():
-    p = {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI["Vällingbyskolan"], "calc_number_of_trips": 5, "language": "sv"}
+    p = {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI["Vällingbyskolan"], "calc_number_of_trips": 3, "language": "sv"}
     p.update(extra)
     d, url = get("trips", p)
-    print(f"\n### variant {name}: {url[-160:]}")
-    print(summarize(d))
-
-# 3) övriga mål med grundparametrar
-for nm in ("Abrahamsbergsskolan", "Norra Ängby skola"):
-    d, url = get("trips", {"type_origin": "any", "name_origin": o, "type_destination": "any", "name_destination": POI[nm], "calc_number_of_trips": 3, "language": "sv"})
-    print(f"\n### mål {nm}")
+    print(f"\n### variant {name}")
     print(summarize(d))

@@ -5,3 +5,9 @@ tid_utc,tid_lokal,veckodag,mal,totalt_min_realtid,totalt_min_planerad,buss_min,g
 2026-10-20T13:01:50Z,2026-10-20 15:01:50,tis,Nya Elementar,24.9,24.9,1.9,23.0,0.0,-6.8,0,117,"Brommaplan, Stockholm","Salixvägen, Stockholm",14:55:00,15:19:54,3,ok
 2026-10-20T13:01:50Z,2026-10-20 15:01:50,tis,Äppelviksskolan,30.4,30.4,9.4,21.0,0.0,7.0,0,124,"Gustav III:s väg, Stockholm","Västerledstorget, Stockholm",15:08:48,15:39:12,3,ok
 2026-10-20T13:01:50Z,2026-10-20 15:01:50,tis,Ålstensskolan,22.5,22.5,4.5,18.0,0.0,7.0,0,124,"Gustav III:s väg, Stockholm","Grundläggarvägen, Stockholm",15:08:48,15:31:18,2,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Vällingbyskolan,49.0,49.0,11.0,38.0,0.0,1.9,0,117,"Brommaplan, Stockholm","Sundbyvägen, Stockholm",15:05:00,15:54:00,3,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Abrahamsbergsskolan,8.7,9.0,0.7,8.0,0.0,-0.4,0,124,"Gustav III:s väg, Stockholm","Abrahamsbergsskolan, Stockholm",15:02:42,15:11:24,2,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Norra Ängby skola,36.9,36.9,6.9,30.0,0.0,1.9,0,117,"Brommaplan, Stockholm","Vultejusvägen, Stockholm",15:05:00,15:41:54,3,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Nya Elementar,24.9,24.9,1.9,23.0,0.0,1.9,0,117,"Brommaplan, Stockholm","Salixvägen, Stockholm",15:05:00,15:29:54,3,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Äppelviksskolan,30.4,30.4,9.4,21.0,0.0,5.7,0,124,"Gustav III:s väg, Stockholm","Västerledstorget, Stockholm",15:08:48,15:39:12,3,ok
+2026-10-20T13:03:03Z,2026-10-20 15:03:03,tis,Ålstensskolan,22.5,22.5,4.5,18.0,0.0,5.7,0,124,"Gustav III:s väg, Stockholm","Grundläggarvägen, Stockholm",15:08:48,15:31:18,3,ok

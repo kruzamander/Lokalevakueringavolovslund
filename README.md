@@ -28,7 +28,7 @@ upplysande än `totalt_min_realtid`.
 | `buss_min` | tid i bussen (summan av alla bussben) |
 | `gang_min` | gångtid till och från hållplats, samt mellan hållplatser |
 | `ovrigt_min` | resten av restiden: väntan vid byten och annat som varken är buss eller gång |
-| `till_avgang_min` | minuter från mätningen till att resan startar |
+| `till_avgang_min` | minuter från mätningen till att resans första ben startar. SL kräver att *bussen* går efter mättillfället och kan därför lägga gångsträckan före bussen före mättillfället, då blir värdet negativt. Det är ingen väntetid, och restiden i `totalt_min_*` påverkas inte |
 | `byten` | antal byten |
 | `linjer` | bussnummer |
 | `pa_hallplats`, `av_hallplats` | hållplats där man stiger på respektive av |

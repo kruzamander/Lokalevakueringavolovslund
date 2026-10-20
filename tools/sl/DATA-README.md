@@ -36,6 +36,8 @@ upplysande än `totalt_min_realtid`.
 | `antal_resor` | hur många resor SL returnerade (0–3) |
 | `status` | `ok`, `inga bussresor` eller ett felmeddelande. Felrader sparas med flit. Börjar statusen med `ok` är raden användbar |
 
+**Källa.** SL, via Trafiklab.se (SL Journey-planner v2). Ange källan när siffrorna används.
+
 Skolor: Vällingbyskolan, Abrahamsbergsskolan, Norra Ängby skola, Nya Elementar, Äppelviksskolan och Ålstensskolan.
 Skollov och helgdagar filtreras inte bort. Gör det i analysen. Ändras kolumnerna i skriptet flyttas den gamla
 filen undan som `sl_matningar.gammalt-schema-<tid>.csv` i stället för att blandas med den nya.

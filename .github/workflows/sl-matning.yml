@@ -1,0 +1,56 @@
+name: SL-mätning
+# Mäter busstiden från Olovslundsskolan till Vällingbyskolan och fem skolor i närområdet var 5:e minut under skoltid.
+# Cron-tiderna är UTC och täcker både sommar- och vintertid; tools/sl/matning.py släpper bara igenom
+# vardagar 06:30–09:00 och 14:00–17:30 svensk tid. Mätningarna sparas i grenen sl-matningar.
+on:
+  schedule:
+    - cron: '*/5 4-8 * * 1-5'
+    - cron: '*/5 12-16 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Mät även utanför skoltid'
+        type: boolean
+        default: false
+  push:
+    branches: [claude/sl-search-vallingbyskolan-ta1cdi]
+    paths: ['.github/workflows/sl-matning.yml', 'tools/sl/matning.py', 'tools/sl/DATA-README.md']
+permissions:
+  contents: write
+concurrency:
+  group: sl-matning-${{ github.event_name == 'push' && 'test' || 'prod' }}
+  cancel-in-progress: false
+env:
+  DATABRANCH: ${{ github.event_name == 'push' && 'sl-matningar-test' || 'sl-matningar' }}
+  FORCE: ${{ (github.event_name == 'push' || inputs.force) && '--force' || '' }}
+jobs:
+  matning:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Förbered databranch
+        run: |
+          git fetch origin "$DATABRANCH:refs/remotes/origin/$DATABRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$DATABRANCH"; then
+            git worktree add -B "$DATABRANCH" data "origin/$DATABRANCH"
+          else
+            git worktree add --orphan -b "$DATABRANCH" data
+          fi
+          cp tools/sl/DATA-README.md data/README.md
+      - name: Mät
+        run: python3 tools/sl/matning.py --ut data/sl_matningar.csv $FORCE
+      - name: Spara
+        working-directory: data
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "Inget att spara"; exit 0; fi
+          git config user.name "sl-matning"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "SL-mätning $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4; do
+            git push origin "HEAD:refs/heads/$DATABRANCH" && exit 0
+            git pull --rebase origin "$DATABRANCH" || true
+            sleep $((i * 2))
+          done
+          exit 1

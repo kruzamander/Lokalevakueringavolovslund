@@ -1,0 +1,7 @@
+tid_utc,tid_lokal,veckodag,mal,totalt_min_realtid,totalt_min_planerad,buss_min,gang_min,byten,linjer,pa_hallplats,av_hallplats,avgang_lokal,ankomst_lokal,forsta_resan_min_realtid,antal_resor,status
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Vällingbyskolan,49.0,49.0,11.0,38.0,0,117,"Brommaplan, Stockholm","Sundbyvägen, Stockholm",14:55:00,15:44:00,49.3,3,ok
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Abrahamsbergsskolan,9.0,9.0,1.0,8.0,0,124,"Gustav III:s väg, Stockholm","Abrahamsbergsskolan, Stockholm",15:02:12,15:11:12,33.5,4,ok
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Norra Ängby skola,36.9,36.9,6.9,30.0,0,117,"Brommaplan, Stockholm","Vultejusvägen, Stockholm",14:45:00,15:21:54,36.9,3,ok
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Nya Elementar,24.9,24.9,1.9,23.0,0,117,"Brommaplan, Stockholm","Salixvägen, Stockholm",14:45:00,15:09:54,24.9,3,ok
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Äppelviksskolan,30.4,30.4,9.4,21.0,0,124,"Gustav III:s väg, Stockholm","Västerledstorget, Stockholm",15:08:48,15:39:12,45.2,3,ok
+2026-10-20T12:48:57Z,2026-10-20 14:48:57,tis,Ålstensskolan,34.4,34.4,2.4,32.0,0,124,"Grundläggarvägen, Stockholm","Rörläggarvägen, Stockholm",14:50:42,15:25:06,34.4,1,ok

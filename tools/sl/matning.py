@@ -3,7 +3,8 @@
 via SL:s öppna reseplanerare (Trafiklab Journey-planner v2, ingen nyckel).
 
 En körning gör en mätning per mål och lägger en rad per mål i en CSV. Körs var 5:e minut av GitHub Actions.
-Mätvärdena är SL:s planerade tider med realtidsuppdateringar, inte uppmätta restider.
+Mätvärdena är SL:s planerade tider med realtidsuppdateringar, inte uppmätta restider, och gäller SL:s ordinarie
+busstrafik (inte eventuell egen skolbussning).
 
   python3 tools/sl/matning.py --ut data/sl_matningar.csv            # bara skoltid vardagar
   python3 tools/sl/matning.py --ut /tmp/test.csv --force            # mät oavsett tid
@@ -30,8 +31,7 @@ ORIGIN = "Olovslundsskolan"
 MAL = [k for k in PLATSER if k != ORIGIN]
 
 KOLUMNER = ["tid_utc", "tid_lokal", "veckodag", "mal", "totalt_min_realtid", "totalt_min_planerad", "buss_min", "gang_min",
-            "byten", "linjer", "pa_hallplats", "av_hallplats", "avgang_lokal", "ankomst_lokal", "forsta_resan_min_realtid",
-            "antal_resor", "status"]
+            "byten", "linjer", "pa_hallplats", "av_hallplats", "avgang_lokal", "ankomst_lokal", "antal_resor", "status"]
 VECKODAGAR = ["mån", "tis", "ons", "tors", "fre", "lör", "sön"]
 
 
@@ -101,7 +101,6 @@ def sammanfatta(d):
         "pa_hallplats": (buss[0]["origin"].get("name") or "") if buss else "",
         "av_hallplats": (buss[-1]["destination"].get("name") or "") if buss else "",
         "avgang_lokal": lokaltid(dep), "ankomst_lokal": lokaltid(arr),
-        "forsta_resan_min_realtid": round(dur(resor[0]) / 60, 1),
         "antal_resor": len(resor),
     }, "ok"
 

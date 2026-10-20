@@ -1,0 +1,13 @@
+name: SL probe
+on:
+  push:
+    branches: [claude/sl-search-vallingbyskolan-ta1cdi]
+    paths: ['tools/sl/probe.py', '.github/workflows/sl-probe.yml']
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/sl/probe.py

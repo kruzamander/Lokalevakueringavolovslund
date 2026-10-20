@@ -1,0 +1,67 @@
+name: SL-mätning
+# Mäter busstiden från Olovslundsskolan till Vällingbyskolan och fem skolor i närområdet under skoltid.
+# Cron-tiderna är UTC. Vintertid (CET) ger 05:30–08:00 och 13:00–16:30, sommartid (CEST) 04:30–07:00 och 12:00–15:30;
+# raderna nedan täcker båda. tools/sl/matning.py släpper bara igenom vardagar 06:30–09:00 och 14:00–17:30 svensk tid.
+# GitHub kan försena eller hoppa över schemalagda körningar, så avståndet mellan mätningarna blir inte exakt 5 minuter.
+# Mätningarna sparas i grenen sl-matningar. Testkörningar (manuell körning med "force") går till
+# sl-matningar-test, så att de aldrig blandas med riktig data.
+on:
+  schedule:
+    - cron: '30-55/5 4 * * 1-5'
+    - cron: '*/5 5-7 * * 1-5'
+    - cron: '*/5 12-15 * * 1-5'
+    - cron: '0-25/5 16 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Testläge: mät oavsett tid och spara i sl-matningar-test'
+        type: boolean
+        default: false
+permissions: {}
+concurrency:
+  group: sl-matning-${{ inputs.force && 'test' || 'prod' }}
+  cancel-in-progress: false
+env:
+  DATABRANCH: ${{ inputs.force && 'sl-matningar-test' || 'sl-matningar' }}
+  FORCE: ${{ inputs.force && '--force' || '' }}
+jobs:
+  matning:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write   # behövs för att spara mätdata i databranchen
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Förbered databranch
+        run: |
+          rc=0
+          git ls-remote --exit-code --heads origin "$DATABRANCH" >/dev/null || rc=$?
+          case $rc in
+            0) git fetch origin "$DATABRANCH:refs/remotes/origin/$DATABRANCH"
+               git worktree add -B "$DATABRANCH" data "origin/$DATABRANCH" ;;
+            2) git worktree add --orphan -b "$DATABRANCH" data ;;
+            *) echo "::error::Kunde inte läsa databranchen (git ls-remote gav $rc)"; exit "$rc" ;;
+          esac
+          cp tools/sl/DATA-README.md data/README.md
+      - name: Mät
+        id: mat
+        continue-on-error: true   # raderna ska sparas även när alla mätningar misslyckats; larmet kommer i sista steget
+        run: python3 tools/sl/matning.py --ut data/sl_matningar.csv $FORCE
+      - name: Spara
+        working-directory: data
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "Inget att spara"; exit 0; fi
+          git config user.name "sl-matning"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "SL-mätning $(date -u +%Y-%m-%dT%H:%MZ)"
+          for i in 1 2 3 4; do
+            git push origin "HEAD:refs/heads/$DATABRANCH" && exit 0
+            sleep $((i * 2))
+          done
+          exit 1
+      - name: Larma om mätningen misslyckades
+        if: steps.mat.outcome == 'failure'
+        run: |
+          echo "::error::Mätningen misslyckades. Se raderna med status 'fel' i datan."
+          exit 1

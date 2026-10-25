@@ -298,3 +298,10 @@ details.more > div { padding: 0 14px 14px; }
   .deck { scroll-behavior: smooth; }
 }
 @media print { .top, .dctl, .gtabs { display: none; } }
+
+.figs { display: grid; gap: 16px; margin-top: 14px; }
+@media (min-width: 760px) { .figs { grid-template-columns: 1fr 1fr; align-items: start; } }
+.figs figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.figs img { display: block; width: 100%; height: auto; }
+.figs figcaption { padding: 8px 12px 10px; font-size: 14px; color: var(--muted); }
+.mapwrap svg { background: #fff; border: 1px solid #bdbdbd; border-radius: 4px; }

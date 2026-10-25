@@ -9,7 +9,7 @@
   var view = document.getElementById("view");
   var live = document.getElementById("live");
   var menuLinks = document.querySelectorAll(".menu a");
-  var PDF = "Alternativ-evakuering-Olovslundsskolan-A4-utkast-3.pdf";
+  var PDF = "Alternativ-evakuering-Olovslundsskolan-A4-utkast-4.pdf";
 
   /* ---------------------------------------------------------------- helpers */
   function esc(s) {
@@ -25,7 +25,7 @@
     return (v < 0 ? "−" : "+") + dec(r, 1) + NBSP + "pp";
   }
   function n0(v) { return String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g, NBSP); }
-  function km(v) { return dec(v, 1) + NBSP + "km"; }
+  function km(v) { return (Math.round(v) === v ? String(v) : dec(v, 1)) + NBSP + "km"; }
   var uidN = 0;
   function uid() { uidN += 1; return "u" + uidN; }
   function byNr(n) { return ALTS[n - 1]; }
@@ -36,12 +36,9 @@
   var COS = Math.cos(O.lat * Math.PI / 180);
   var KMDEG = 111.19; // km per grad (R = 6371 km)
   function proj(lat, lon) { return { x: (lon - O.lon) * COS * KMDEG, y: (lat - O.lat) * KMDEG }; }
-  function dist(code) {
-    var s = S[code];
-    if (s.lat === undefined) return null;
-    var p = proj(s.lat, s.lon);
-    return Math.sqrt(p.x * p.x + p.y * p.y);
-  }
+  // Avstånd enligt föräldragruppens avståndskartläggning. † = fågelväg (avstånd saknas i kartläggningen).
+  function dist(code) { var v = S[code].dist; return v === undefined ? null : v; }
+  function kmTxt(code) { var d = dist(code); return d === null ? "" : km(d) + (S[code].dist_geo ? "\u2020" : ""); }
   var KOMMUN = ["VAL", "AL"];
 
   /* ---------------------------------------------------------- district data */
@@ -157,7 +154,7 @@
       '<span><i class="ln d"></i>' + pct(BENCH) + " = förvaltningens nivå</span></div>";
   }
 
-  /* ------------------------------------------------------------------ karta */
+  /* ------------------------------------------------------------------ karta (svartvit kartprofil) */
   var XR = [-4.3, 3.0], YR = [-1.6, 4.3], MW = 360;
   var MS = MW / (XR[1] - XR[0]);
   var MH = Math.round((YR[1] - YR[0]) * MS);
@@ -165,15 +162,17 @@
     px: function (x) { return (x - XR[0]) * MS; },
     py: function (y) { return (YR[1] - y) * MS; }
   };
+  var NAVY = "#0b2a4a", BLUE = "#cfe3f3";
   var LABEL = {
-    OL: { dx: 0, dy: 25, a: "middle" },
-    ABA: { dx: 0, dy: -12, a: "middle" },
-    NA: { dx: 10, dy: 4, a: "start" },
-    NE: { dx: 10, dy: 4, a: "start" },
-    AV: { dx: 12, dy: 22, a: "end" },
-    AL: { dx: -9, dy: 18, a: "end" },
-    VAL: { dx: 11, dy: 4, a: "start" }
+    OL: { dx: 0, dy: 26, a: "middle" },
+    ABA: { dx: 0, dy: -17, a: "middle" },
+    NA: { dx: 17, dy: 4, a: "start" },
+    NE: { dx: 17, dy: 4, a: "start" },
+    AV: { dx: 14, dy: 27, a: "end" },
+    AL: { dx: -12, dy: 25, a: "end" },
+    VAL: { dx: 17, dy: 4, a: "start" }
   };
+  var HALO = ' stroke="#fff" stroke-width="3.4" paint-order="stroke" stroke-linejoin="round"';
 
   function routeLine(code, color, dashed, off) {
     var p = proj(S[code].lat, S[code].lon);
@@ -188,34 +187,31 @@
     var id = uid();
     var green = a ? a.schools.filter(function (c) { return S[c].lat !== undefined; }) : [];
     var hasPav = a ? a.schools.indexOf("PAV") >= 0 : false;
+    var hasGeo = false;
     var out = '<svg viewBox="0 0 ' + MW + " " + MH + '" role="img" aria-label="' +
       esc("Karta över Olovslundsskolan och skolorna i " + (a ? "alternativ " + a.nr + " och i förvaltningens förslag" : "förvaltningens förslag") +
-        ". Röda streckade linjer visar förvaltningens förslag, gröna linjer visar alternativet. Avstånden är fågelväg.") + '">';
+        ". Röda streckade linjer visar förvaltningens förslag, gröna linjer visar alternativet. Linjerna är schematiska.") + '">';
     out += '<defs><clipPath id="' + id + '"><rect width="' + MW + '" height="' + MH + '"/></clipPath></defs>';
+    out += '<rect width="' + MW + '" height="' + MH + '" fill="#fff"/>';
     out += '<g clip-path="url(#' + id + ')">';
-    // stadsdelsområden (om kartdata finns)
+    // rutnät, 1 km
+    for (var gx = Math.ceil(XR[0]); gx <= XR[1]; gx++) out += '<line x1="' + sv(vb.px(gx), 1) + '" x2="' + sv(vb.px(gx), 1) + '" y1="0" y2="' + MH + '" stroke="#ececec"/>';
+    for (var gy = Math.ceil(YR[0]); gy <= YR[1]; gy++) out += '<line x1="0" x2="' + MW + '" y1="' + sv(vb.py(gy), 1) + '" y2="' + sv(vb.py(gy), 1) + '" stroke="#ececec"/>';
+    // stadsdelsområden (om districts.geojson finns)
     if (districts) {
       districts.features.forEach(function (f) {
         var g = f.geometry; if (!g) return;
         var nm = featName(f);
-        var cls = /bromma/i.test(nm) ? "#7f918f" : /v.llingby|h.sselby/i.test(nm) ? "#c98d72" : "#b9b2ab";
+        var bro = /bromma/i.test(nm), hv = /v.llingby|h.sselby/i.test(nm);
         var polys = g.type === "Polygon" ? [g.coordinates] : g.type === "MultiPolygon" ? g.coordinates : [];
         var d = "";
         polys.forEach(function (poly) { poly.forEach(function (ring) { d += ringPath(ring, MW, MH, vb); }); });
-        if (d) out += '<path d="' + d + '" fill="' + cls + '" fill-opacity=".14" fill-rule="evenodd" stroke="' + cls + '" stroke-width="1.6" stroke-dasharray="2 3"><title>' + esc(nm) + "</title></path>";
+        if (d) out += '<path d="' + d + '" fill="' + (bro ? BLUE : hv ? "#efefef" : "none") + '" fill-opacity=".75" fill-rule="evenodd" stroke="' + (bro ? NAVY : "#777") + '" stroke-width="1.6"' + (bro ? "" : ' stroke-dasharray="4 3"') + "><title>" + esc(nm) + "</title></path>";
       });
     }
-    // ringar
-    [1, 2, 3, 5].forEach(function (r) {
-      out += '<circle cx="' + sv(vb.px(0), 1) + '" cy="' + sv(vb.py(0), 1) + '" r="' + sv(r * MS, 1) + '" fill="none" stroke="#cfc4ba" stroke-width="1" stroke-dasharray="3 4"/>';
-    });
     // resvägar
-    KOMMUN.forEach(function (c) {
-      out += routeLine(c, "#b3261e", true, green.indexOf(c) >= 0 ? -2.2 : 0);
-    });
-    green.forEach(function (c) {
-      out += routeLine(c, "#1c7a49", false, KOMMUN.indexOf(c) >= 0 ? 2.2 : 0);
-    });
+    KOMMUN.forEach(function (c) { out += routeLine(c, "#b3261e", true, green.indexOf(c) >= 0 ? -2.2 : 0); });
+    green.forEach(function (c) { out += routeLine(c, "#1c7a49", false, KOMMUN.indexOf(c) >= 0 ? 2.2 : 0); });
     // skolor
     Object.keys(S).forEach(function (c) {
       var s = S[c];
@@ -223,37 +219,41 @@
       var p = proj(s.lat, s.lon), x = vb.px(p.x), y = vb.py(p.y);
       var inG = green.indexOf(c) >= 0, inK = KOMMUN.indexOf(c) >= 0;
       var strong = inG || inK;
-      var col = inG ? "#1c7a49" : inK ? "#b3261e" : "#7f918f";
       var hv = s.district !== "Bromma";
-      var fill = hv ? "#f2d4c4" : (strong ? "#fff" : "#d7dedd");
+      if (inG) out += '<circle cx="' + sv(x, 1) + '" cy="' + sv(y, 1) + '" r="15" fill="' + BLUE + '" stroke="' + NAVY + '" stroke-width="1.5"/>';
+      else if (inK) out += '<circle cx="' + sv(x, 1) + '" cy="' + sv(y, 1) + '" r="15" fill="#f7e1de" stroke="#b3261e" stroke-width="1.3" stroke-dasharray="3 2"/>';
+      var col = strong ? "#111" : "#8a8a8a";
       out += hv
-        ? '<rect x="' + sv(x - 5.5, 1) + '" y="' + sv(y - 5.5, 1) + '" width="11" height="11" rx="2" fill="' + fill + '" stroke="' + col + '" stroke-width="2.4"/>'
-        : '<circle cx="' + sv(x, 1) + '" cy="' + sv(y, 1) + '" r="6" fill="' + fill + '" stroke="' + col + '" stroke-width="2.4"/>';
+        ? '<rect x="' + sv(x - 5.5, 1) + '" y="' + sv(y - 5.5, 1) + '" width="11" height="11" rx="1.5" fill="#fff" stroke="' + col + '" stroke-width="2.4"/>'
+        : '<circle cx="' + sv(x, 1) + '" cy="' + sv(y, 1) + '" r="5.5" fill="#fff" stroke="' + col + '" stroke-width="2.4"/>';
       var L = LABEL[c] || { dx: 9, dy: 4, a: "start" };
-      var d = dist(c);
-      var txt = s.short + (strong ? " " + dec(d, 1) + " km" : "");
+      var dd = kmTxt(c);
+      if (S[c].dist_geo && strong) hasGeo = true;
+      var txt = s.short + (strong && dd ? " " + dd : "");
       out += '<text x="' + sv(x + L.dx, 1) + '" y="' + sv(y + L.dy, 1) + '" text-anchor="' + L.a + '" font-size="' + (strong ? 11.5 : 10) +
-        '" font-weight="' + (strong ? 600 : 400) + '" fill="' + (strong ? "#1c1c1c" : "#55615f") +
-        '" stroke="#f4efe9" stroke-width="3.2" paint-order="stroke" stroke-linejoin="round">' + esc(txt) + "</text>";
+        '" font-weight="' + (strong ? 600 : 400) + '" fill="' + (strong ? "#111" : "#6b6b6b") + '"' + HALO + ">" + esc(txt) + "</text>";
     });
-    // Olovslund
+    // Olovslundsskolan
     var ox = vb.px(0), oy = vb.py(0);
-    out += '<circle cx="' + sv(ox, 1) + '" cy="' + sv(oy, 1) + '" r="9" fill="#1c1c1c" stroke="#fff" stroke-width="2.5"/>';
-    out += '<text x="' + sv(ox, 1) + '" y="' + sv(oy + 25, 1) + '" text-anchor="middle" font-size="12" font-weight="600" fill="#1c1c1c" stroke="#f4efe9" stroke-width="3.4" paint-order="stroke" stroke-linejoin="round">Olovslundsskolan</text>';
-    // skala och norr
-    var u = MS;
-    out += '<line x1="12" x2="' + sv(12 + u, 1) + '" y1="' + (MH - 12) + '" y2="' + (MH - 12) + '" stroke="#1c1c1c" stroke-width="2"/>';
-    out += '<text x="' + sv(12 + u / 2, 1) + '" y="' + (MH - 17) + '" font-size="10" text-anchor="middle" fill="#1c1c1c">1 km</text>';
-    out += '<path d="M' + (MW - 20) + ' 12l6 14-6-4-6 4z" fill="#1c1c1c"/><text x="' + (MW - 20) + '" y="40" font-size="11" font-weight="600" text-anchor="middle" fill="#1c1c1c">N</text>';
+    out += '<circle cx="' + sv(ox, 1) + '" cy="' + sv(oy, 1) + '" r="9" fill="' + NAVY + '" stroke="#fff" stroke-width="2.5"/>';
+    out += '<text x="' + sv(ox, 1) + '" y="' + sv(oy + 28, 1) + '" text-anchor="middle" font-size="12" font-weight="600" fill="' + NAVY + '"' + HALO + ">Olovslundsskolan</text>";
+    // skalstock (fågelväg) och norrpil
+    var u = MS, bx = 12, by = MH - 16;
+    out += '<rect x="' + bx + '" y="' + by + '" width="' + sv(u, 1) + '" height="5" fill="#111"/><rect x="' + sv(bx + u, 1) + '" y="' + by + '" width="' + sv(u, 1) + '" height="5" fill="#fff" stroke="#111"/>';
+    out += '<text x="' + bx + '" y="' + (by - 4) + '" font-size="10" fill="#111">0</text><text x="' + sv(bx + u, 1) + '" y="' + (by - 4) + '" font-size="10" text-anchor="middle" fill="#111">1</text><text x="' + sv(bx + 2 * u, 1) + '" y="' + (by - 4) + '" font-size="10" text-anchor="middle" fill="#111">2 km</text>';
+    out += '<g transform="translate(' + (MW - 24) + ' 30)"><circle r="14" fill="#fff" stroke="#111" stroke-width="1.2"/><path d="M0 -11 L5 4 L0 1 L-5 4 Z" fill="#111"/><text y="-15" font-size="10" font-weight="600" text-anchor="middle" fill="#111">N</text></g>';
+    out += '<rect width="' + MW + '" height="' + MH + '" fill="none" stroke="#bdbdbd"/>';
     out += "</g></svg>";
 
-    var leg = '<div class="legend"><span><i class="ln d"></i>Förvaltningens förslag (barnens resväg)</span>' +
-      (a ? '<span><i class="ln g"></i>Alternativ ' + a.nr + " (barnens resväg)</span>" : "") +
-      '<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="#d7dedd" stroke="#7f918f" stroke-width="2"/></svg>Stadsdelsområde Bromma</span>' +
-      '<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="2" fill="#f2d4c4" stroke="#c98d72" stroke-width="2"/></svg>Stadsdelsområde Hässelby-Vällingby</span></div>';
-    var note = '<p class="mapnote">Avstånd i fågelväg från Olovslundsskolan, inte verklig väg. Ringar: 1, 2, 3 och 5' + NBSP + 'km. ' +
+    var leg = '<div class="legend"><span><i class="ln d"></i>Förvaltningens förslag, barnens resväg</span>' +
+      (a ? '<span><i class="ln g"></i>Alternativ ' + a.nr + ", barnens resväg</span>" +
+        '<span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="' + BLUE + '" stroke="' + NAVY + '" stroke-width="1.3"/></svg>Lokal i alternativet</span>' : "") +
+      '<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="4.5" fill="#fff" stroke="#111" stroke-width="2"/></svg>Bromma stadsdelsområde</span>' +
+      '<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="1.5" fill="#fff" stroke="#111" stroke-width="2"/></svg>Hässelby-Vällingby stadsdelsområde</span></div>';
+    var note = '<p class="mapnote">Avstånd enligt föräldragruppens avståndskartläggning. Linjer och lägen är schematiska: raka streck mellan skolornas koordinater, rutnät och skalstock i fågelväg. ' +
+      (hasGeo ? "† Abrahamsberg saknar angivet avstånd: fågelväg visas. " : "") +
       (hasPav ? "Paviljong Åkeshovsvägen 7 är inte inritad: läget är inte angivet i underlaget. " : "") +
-      (districts ? "Skuggade ytor visar stadsdelsområdenas gränser." : 'Stadsdelsområde anges per skola enligt stadens indelning. Gränslinjerna ritas när kartdata läggs in (se <a href="#/karta">Om kartan</a>).') + "</p>";
+      (districts ? "Ljusblå yta: Bromma stadsdelsområde." : 'Stadsdelsområde anges per skola enligt stadens indelning. Gränsen mellan Bromma och Hässelby-Vällingby: se <a href="#/karta">Om kartan</a>.') + "</p>";
     return '<div class="mapwrap">' + out + "</div>" + leg + note;
   }
 
@@ -269,14 +269,14 @@
       var s = S[c], d = dist(c);
       html += '<div class="school"><span class="nm">' + esc(s.name) + '</span><span class="cp">' + n0(s.cap) + " platser</span>" +
         '<span class="dist">' + distChip(c) +
-        (d !== null ? '<span class="sw">' + km(d) + " fågelväg</span>" : '<span class="chip dash">läge ej utsatt på kartan</span>') + "</span></div>";
+        (d !== null ? '<span class="sw">' + kmTxt(c) + "</span>" : '<span class="chip dash">läge ej utsatt på kartan</span>') + "</span></div>";
     });
     return html + "</div>";
   }
   function maxDist(codes) {
-    var m = 0, any = false;
-    codes.forEach(function (c) { var d = dist(c); if (d !== null) { any = true; if (d > m) m = d; } });
-    return any ? m : null;
+    var m = -1, mc = null;
+    codes.forEach(function (c) { var d = dist(c); if (d !== null && d > m) { m = d; mc = c; } });
+    return mc;
   }
   function windowAnp(a, row) { return T.anp.rows[row][1 + winIdx(a)]; }
 
@@ -288,9 +288,9 @@
       (over ? "över" : "under") + " förvaltningens nivå (" + pct(BENCH) + ")</span></div>" +
       diffBarSVG(a.diff_pp) +
       '<p class="cmp-sub">0 = förvaltningens nivå. Stapeln visar högsta beläggningen under de två åren.</p>' +
-      '<div class="vs"><div class="k"><b>Förvaltningens förslag</b>Vällingby + Ålsten<br>' + pct(BENCH) + " (Ålsten)<br>Bussning av ca 380 elever<br>Längst " + km(dist("VAL")) + "<br>Anpassad grundskola: avvecklas 2028</div>" +
+      '<div class="vs"><div class="k"><b>Förvaltningens förslag</b>Vällingby + Ålsten<br>' + pct(BENCH) + " (Ålsten)<br>Bussning av ca 380 elever<br>Längst " + kmTxt("VAL") + "<br>Anpassad grundskola: avvecklas 2028</div>" +
       '<div class="f"><b>Alternativ ' + a.nr + "</b>" + esc(a.title) + "<br>" + pct(a.max_bel) + " högst<br>Ingen daglig busstransport<br>" +
-      (md !== null ? "Längst " + km(md) + (hasPav ? " + paviljong (läge ej utsatt)" : "") : "Läge ej utsatt") + "<br>Anpassad grundskola: " + esc(a.anp.charAt(0).toLowerCase() + a.anp.slice(1)) + "</div></div>";
+      (md !== null ? "Längst " + kmTxt(md) + (hasPav ? " + paviljong (läge ej utsatt)" : "") : "Läge ej utsatt") + "<br>Anpassad grundskola: " + esc(a.anp.charAt(0).toLowerCase() + a.anp.slice(1)) + "</div></div>";
   }
 
   function card(a) {
@@ -503,7 +503,7 @@
       ["Lokaler", "Vällingbyskolan (paviljonger) + Ålstensskolan", a.title],
       ["Högsta beläggning", pct(BENCH) + " (Ålsten) = nivån", pct(a.max_bel)],
       ["Skillnad mot nivån", "0", pp(a.diff_pp) + (isOver(a) ? " ▲" : "")],
-      ["Längsta avstånd (fågelväg)", km(dist("VAL")), md !== null ? km(md) + (hasPav ? " + paviljong (läge ej utsatt)" : "") : "läge ej utsatt"],
+      ["Längsta avstånd", kmTxt("VAL"), md !== null ? kmTxt(md) + (hasPav ? " + paviljong (läge ej utsatt)" : "") : "läge ej utsatt"],
       ["Bussning", "Ca 380 elever", "Ingen daglig busstransport"],
       ["Anpassad grundskola", "Avvecklas ht 2028 utan alternativ", a.anp]
     ];
@@ -513,15 +513,15 @@
   }
 
   function routeTable(a) {
-    var h = '<table class="tbl stack"><thead><tr><th>Resväg från Olovslundsskolan</th><th>Stadsdelsområde</th><th class="n">Fågelväg</th></tr></thead><tbody>';
+    var h = '<table class="tbl stack"><thead><tr><th>Resväg från Olovslundsskolan</th><th>Stadsdelsområde</th><th class="n">Avstånd</th></tr></thead><tbody>';
     h += '<tr class="grp"><td colspan="3"><span class="ln d" style="vertical-align:middle"></span> Förvaltningens förslag</td></tr>';
-    KOMMUN.forEach(function (c) { h += '<tr><td data-l="Resväg">' + esc(S[c].name) + '</td><td data-l="Stadsdelsområde">' + esc(S[c].district) + '</td><td class="n" data-l="Fågelväg">' + km(dist(c)) + "</td></tr>"; });
+    KOMMUN.forEach(function (c) { h += '<tr><td data-l="Resväg">' + esc(S[c].name) + '</td><td data-l="Stadsdelsområde">' + esc(S[c].district) + '</td><td class="n" data-l="Avstånd">' + kmTxt(c) + "</td></tr>"; });
     h += '<tr class="grp"><td colspan="3"><span class="ln g" style="vertical-align:middle"></span> Alternativ ' + a.nr + "</td></tr>";
     a.schools.forEach(function (c) {
       var d = dist(c);
-      h += '<tr><td data-l="Resväg">' + esc(S[c].name) + '</td><td data-l="Stadsdelsområde">' + esc(S[c].district) + '</td><td class="n" data-l="Fågelväg">' + (d !== null ? km(d) : "läge ej utsatt") + "</td></tr>";
+      h += '<tr><td data-l="Resväg">' + esc(S[c].name) + '</td><td data-l="Stadsdelsområde">' + esc(S[c].district) + '</td><td class="n" data-l="Avstånd">' + (d !== null ? kmTxt(c) : "läge ej utsatt") + "</td></tr>";
     });
-    return h + '</tbody></table><p class="src">Avstånd i fågelväg från Olovslundsskolan. Verkliga resvägar och restider mäts separat.</p>';
+    return h + '</tbody></table><p class="src">Avstånd från Olovslundsskolan enligt föräldragruppens avståndskartläggning (sid 6 i PDF:en). \u2020 Abrahamsberg saknar angivet avstånd: fågelväg visas. Restider mäts separat.</p>';
   }
 
   function mattTable() {
@@ -673,11 +673,15 @@
   }
   function aboutMapView() {
     return '<div class="page"><p class="kick">Om kartan</p><h1>Vad kartan visar och inte visar</h1><ul class="list" style="margin-top:18px">' +
-      "<li><b>Resvägar.</b> Röda streckade linjer är förvaltningens förslag (Vällingbyskolan och Ålstensskolan). Gröna heldragna linjer är föräldragruppens alternativ. Linjerna är fågelväg från Olovslundsskolan, inte verklig väg. Verkliga restider mäts separat.</li>" +
+      "<li><b>Resvägar.</b> Röda streckade linjer är förvaltningens förslag (Vällingbyskolan och Ålstensskolan). Gröna heldragna linjer är föräldragruppens alternativ. Linjerna är raka streck mellan skolornas lägen, inte verkliga vägar. Verkliga restider mäts separat.</li>" +
+      "<li><b>Avstånd.</b> Siffrorna är de från föräldragruppens avståndskartläggning (sid 6 i PDF:en): Vällingbyskolan 7" + NBSP + "km, Ålstensskolan 1,8" + NBSP + "km, Nya Elementar 1,9" + NBSP + "km, Äppelviksskolan 3" + NBSP + "km och Norra Ängby skola 3" + NBSP + "km. Abrahamsbergsskolan saknar angivet avstånd; fågelvägen 0,8" + NBSP + "km visas, markerad med †.</li>" +
       "<li><b>Stadsdelsområde.</b> Varje skola är märkt med det stadsdelsområde den ligger i enligt stadens indelning: Olovslundsskolan, Abrahamsbergsskolan, Norra Ängby skola, Nya Elementar, Äppelviksskolan och Ålstensskolan i Bromma, Vällingbyskolan i Hässelby-Vällingby. Märkningen är inte uträknad från kartdata.</li>" +
-      "<li><b>Gränslinjer.</b> " + (districts ? "Stadsdelsområdenas gränser ritas från filen <code>districts.geojson</code>." : "Stadsdelsområdenas gränslinjer ritas inte ännu, eftersom kartdata inte kunde hämtas när sidan byggdes. Sidan ritar dem automatiskt så fort filen <code>districts.geojson</code> (GeoJSON, WGS84, polygoner per stadsdelsområde) läggs i samma mapp som sidan.") + "</li>" +
-      "<li><b>Koordinater.</b> Skolornas lägen kommer från SL:s platsdata. Paviljong Åkeshovsvägen 7 är inte inritad: läget är inte angivet i underlaget.</li>" +
-      "<li><b>Ringar.</b> 1, 2, 3 och 5" + NBSP + "km från Olovslundsskolan.</li></ul></div>";
+      "<li><b>Gränslinjen.</b> " + (districts ? "Stadsdelsområdenas gränser ritas från filen <code>districts.geojson</code>." : "Gränsen mellan Bromma och Hässelby-Vällingby är ännu inte inritad i kartorna, eftersom exakta gränsdata inte kunde hämtas när sidan byggdes. Bilderna nedan visar var den går enligt stadens egen karta. Sidan ritar gränsen automatiskt så fort filen <code>districts.geojson</code> (GeoJSON, WGS84, en polygon per stadsdelsområde) läggs i samma mapp som sidan.") + "</li>" +
+      "<li><b>Koordinater.</b> Skolornas lägen kommer från SL:s platsdata. Paviljong Åkeshovsvägen 7 är inte inritad: läget är inte angivet i underlaget.</li></ul>" +
+      '<h2>Stadsdelsområdena enligt stadens karta</h2><p class="muted">Skärmbilder från Stockholms stads karta Områden (vaxer.stockholm). Hässelby-Vällingby ligger väster och norr om gränsen mot Bromma, Bromma öster och söder om den.</p>' +
+      '<div class="figs"><figure><img src="img/stadsdelsomraden-oversikt.jpg" width="900" height="1191" alt="Karta över Hässelby-Vällingby och Bromma stadsdelsområde med områdesgränser" loading="lazy"><figcaption>Hässelby-Vällingby och Bromma stadsdelsområde. Skalstocken i originalet motsvarar 2' + NBSP + 'km.</figcaption></figure>' +
+      '<figure><img src="img/olovslund-akeshov.jpg" width="900" height="1398" alt="Närbild av Åkeshov, Åkeslund och Olovslund med områdesgränser" loading="lazy"><figcaption>Närbild: Åkeshov, Åkeslund och Olovslund.</figcaption></figure></div>' +
+      '<p class="src">Källa: Stockholms stad, vaxer.stockholm (skärmbilder).</p></div>';
   }
   function moreView() {
     return '<div class="page"><p class="kick">Mer</p><h1>Underlag och bakgrund</h1><div class="tiles" style="margin-top:18px">' +

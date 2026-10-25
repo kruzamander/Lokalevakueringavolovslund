@@ -15,14 +15,16 @@ BENCH, OL, PROG = D["BENCH"], {int(y): v for y, v in D["OL"].items()}, {k: {int(
 NB = " "
 
 # Koordinater [lat, lon] från SL:s platsuppslag 2026-10-20. Stadsdelsområde enligt stadens indelning (inte beräknat från gränsdata).
+# dist = avstånd i km enligt föräldragruppens avståndskartläggning (sid 6 i PDF:en). Abrahamsberg saknar angivet avstånd:
+# dist_geo=True betyder att fågelvägen (0,8 km) visas i stället, markerad med †.
 SCHOOLS = {
     "OL": dict(name="Olovslundsskolan", short="Olovslund", lat=59.331815, lon=17.938242, district="Bromma"),
-    "ABA": dict(name="Abrahamsbergsskolan", short="Abrahamsberg", lat=59.335063, lon=17.950118, district="Bromma", cap=780),
-    "NA": dict(name="Norra Ängby skola", short="Norra Ängby", lat=59.349414, lon=17.908427, district="Bromma", cap=784),
-    "NE": dict(name="Nya Elementar", short="Nya Elementar", lat=59.342576, lon=17.926349, district="Bromma", cap=1068),
-    "AV": dict(name="Äppelviksskolan", short="Äppelviken", lat=59.323011, lon=17.975675, district="Bromma", cap=680),
-    "AL": dict(name="Ålstensskolan", short="Ålsten", lat=59.325427, lon=17.957484, district="Bromma", cap=476),
-    "VAL": dict(name="Vällingbyskolan", short="Vällingby", lat=59.363553, lon=17.881936, district="Hässelby-Vällingby", cap=1050),
+    "ABA": dict(name="Abrahamsbergsskolan", short="Abrahamsberg", lat=59.335063, lon=17.950118, district="Bromma", cap=780, dist=0.8, dist_geo=True),
+    "NA": dict(name="Norra Ängby skola", short="Norra Ängby", lat=59.349414, lon=17.908427, district="Bromma", cap=784, dist=3),
+    "NE": dict(name="Nya Elementar", short="Nya Elementar", lat=59.342576, lon=17.926349, district="Bromma", cap=1068, dist=1.9),
+    "AV": dict(name="Äppelviksskolan", short="Äppelviken", lat=59.323011, lon=17.975675, district="Bromma", cap=680, dist=3),
+    "AL": dict(name="Ålstensskolan", short="Ålsten", lat=59.325427, lon=17.957484, district="Bromma", cap=476, dist=1.8),
+    "VAL": dict(name="Vällingbyskolan", short="Vällingby", lat=59.363553, lon=17.881936, district="Hässelby-Vällingby", cap=1050, dist=7),
     "PAV": dict(name="Paviljong Åkeshovsvägen 7", short="Paviljong Åkeshovsvägen 7", district="Bromma", cap=240),
 }
 KEY = {"Abrahamsbergsskolan": "ABA", "Norra Ängby skola": "NA", "Nya Elementar": "NE", "Ålstensskolan": "AL", "Äppelviksskolan": "AV",

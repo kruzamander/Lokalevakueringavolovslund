@@ -1,0 +1,1567 @@
+{
+ "alts": [
+  {
+   "nr": 1,
+   "namn": "Alternativ 1 2028 ABA + NÄ",
+   "blad": "2028, ABA & Norra Ä",
+   "start": 2028,
+   "notes": [
+    [
+     "G20",
+     "Det blir så lite byte och förändring i miljö som möjligt för dessa barn."
+    ],
+    [
+     "G21",
+     "Olovslundsskolans ledning kan sitta i sin tredje enhet, Nockebyhovsskolan där de är en gång i veckan idag. Pga minskat intag bör det finnas plats i de lokalerna."
+    ],
+    [
+     "B23",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ],
+    [
+     "B64",
+     "Evakuering 2030"
+    ],
+    [
+     "G71",
+     "norra ängby 2"
+    ],
+    [
+     "B75",
+     "Evakuerade åk"
+    ],
+    [
+     "B76",
+     "Evakuerade elever"
+    ],
+    [
+     "B77",
+     "Antal elever inkl evakuering"
+    ],
+    [
+     "B78",
+     "Accepterad beläggning"
+    ]
+   ],
+   "years": {
+    "2028": {
+     "ol": 534.0,
+     "per_ak": 76.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 583.0,
+       "ak": 4,
+       "evak": 305.14285714285717,
+       "bel": 1.1386446886446886,
+       "ledig": 197.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 627.0,
+       "ak": 3,
+       "evak": 228.85714285714286,
+       "bel": 1.0916545189504374,
+       "ledig": 157.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1386446886446886,
+     "ledig": 354.0,
+     "behov": 534.0,
+     "kap_sum": 1564
+    },
+    "2029": {
+     "ol": 522.0,
+     "per_ak": 74.57142857142857,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 570.0,
+       "ak": 3,
+       "evak": 223.71428571428572,
+       "bel": 1.0175824175824177,
+       "ledig": 210.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 589.0,
+       "ak": 4,
+       "evak": 298.2857142857143,
+       "bel": 1.1317419825072885,
+       "ledig": 195.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1317419825072885,
+     "ledig": 405.0,
+     "behov": 522.0,
+     "kap_sum": 1564
+    }
+   },
+   "max_bel": 1.1386446886446886,
+   "over_pp": -0.7513774740665502
+  },
+  {
+   "nr": 2,
+   "namn": "Alternativ 2 2028 ABA + NE",
+   "blad": "2028, ABA & NE",
+   "start": 2028,
+   "notes": [
+    [
+     "C20",
+     "f-3 Abrahamsberg, 4-6 Nya Elementar"
+    ],
+    [
+     "J20",
+     "1-4 Abrahamsberg, f, 5-6 Nya elementar"
+    ],
+    [
+     "C22",
+     "3-6 abrahamsberg, f-2 Nya elementar"
+    ],
+    [
+     "J22",
+     "f, 4-6 Abrahamsberg"
+    ],
+    [
+     "B24",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ],
+    [
+     "B27",
+     "Elevframskrivning"
+    ],
+    [
+     "B28",
+     "Minskning per år"
+    ]
+   ],
+   "years": {
+    "2028": {
+     "ol": 534.0,
+     "per_ak": 76.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 583.0,
+       "ak": 4,
+       "evak": 305.14285714285717,
+       "bel": 1.1386446886446886,
+       "ledig": 197.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 977.0,
+       "ak": 3,
+       "evak": 228.85714285714286,
+       "bel": 1.129079721776351,
+       "ledig": 91.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1386446886446886,
+     "ledig": 288.0,
+     "behov": 534.0,
+     "kap_sum": 1848
+    },
+    "2029": {
+     "ol": 522.0,
+     "per_ak": 74.57142857142857,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 570.0,
+       "ak": 4,
+       "evak": 298.2857142857143,
+       "bel": 1.113186813186813,
+       "ledig": 210.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 959.0,
+       "ak": 3,
+       "evak": 223.71428571428572,
+       "bel": 1.10741037988229,
+       "ledig": 109.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.113186813186813,
+     "ledig": 319.0,
+     "behov": 522.0,
+     "kap_sum": 1848
+    }
+   },
+   "max_bel": 1.1386446886446886,
+   "over_pp": -0.7513774740665502
+  },
+  {
+   "nr": 3,
+   "namn": "Alternativ 3 2028 ABA + Paviljong",
+   "blad": "2028, ABA & paviljong",
+   "start": 2028,
+   "notes": [
+    [
+     "C20",
+     "Specialsalar mm"
+    ],
+    [
+     "J20",
+     "Specialsalar mm"
+    ],
+    [
+     "C21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "J21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "C23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "J23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "C25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "J25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "C27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "J27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "C29",
+     "Ingen slöjd för barnen i Paviljongen"
+    ],
+    [
+     "J29",
+     "Slöjd: 1,25 timmar i veckan á 2-3 klasser = 2,5 - 3,75 timmar/veckan. Då går man 700 m till abrahamsberg"
+    ],
+    [
+     "B32",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ]
+   ],
+   "years": {
+    "2028": {
+     "ol": 534.0,
+     "per_ak": 76.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 583.0,
+       "ak": 4,
+       "evak": 305.14285714285717,
+       "bel": 1.1386446886446886,
+       "ledig": 197.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 228.85714285714286,
+       "bel": 0.9535714285714286,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1386446886446886,
+     "ledig": 437.0,
+     "behov": 534.0,
+     "kap_sum": 1020
+    },
+    "2029": {
+     "ol": 522.0,
+     "per_ak": 74.57142857142857,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 570.0,
+       "ak": 4,
+       "evak": 298.2857142857143,
+       "bel": 1.113186813186813,
+       "ledig": 210.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 223.71428571428572,
+       "bel": 0.9321428571428572,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.113186813186813,
+     "ledig": 450.0,
+     "behov": 522.0,
+     "kap_sum": 1020
+    }
+   },
+   "max_bel": 1.1386446886446886,
+   "over_pp": -0.7513774740665502
+  },
+  {
+   "nr": 4,
+   "namn": "Alternativ 4 2028 NE + Paviljong",
+   "blad": "2028, NE & paviljong",
+   "start": 2028,
+   "notes": [
+    [
+     "C20",
+     "Specialsalar mm"
+    ],
+    [
+     "J20",
+     "Specialsalar mm"
+    ],
+    [
+     "C21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "J21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "C23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "J23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "C25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "J25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "C27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "J27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "C29",
+     "Ingen slöjd för barnen i Paviljongen"
+    ],
+    [
+     "J29",
+     "Slöjd: 1,25 timmar i veckan á 2-3 klasser = 2,5 - 3,75 timmar/veckan. Då går man 700 m till abrahamsberg"
+    ],
+    [
+     "B31",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ]
+   ],
+   "years": {
+    "2028": {
+     "ol": 534.0,
+     "per_ak": 76.28571428571429,
+     "skolor": [
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 977.0,
+       "ak": 4,
+       "evak": 305.14285714285717,
+       "bel": 1.2005082932049225,
+       "ledig": 91.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 228.85714285714286,
+       "bel": 0.9535714285714286,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.2005082932049225,
+     "ledig": 331.0,
+     "behov": 534.0,
+     "kap_sum": 1308
+    },
+    "2029": {
+     "ol": 522.0,
+     "per_ak": 74.57142857142857,
+     "skolor": [
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 959.0,
+       "ak": 4,
+       "evak": 298.2857142857143,
+       "bel": 1.1772338148742643,
+       "ledig": 109.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 223.71428571428572,
+       "bel": 0.9321428571428572,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1772338148742643,
+     "ledig": 349.0,
+     "behov": 522.0,
+     "kap_sum": 1308
+    }
+   },
+   "max_bel": 1.2005082932049225,
+   "over_pp": 5.434982981956837
+  },
+  {
+   "nr": 5,
+   "namn": "Alternativ 5 2030 ABA + NÄ",
+   "blad": "2030, ABA & Norra Ä ",
+   "start": 2030,
+   "notes": [
+    [
+     "G20",
+     "Det blir så lite byte och förändring i miljö som möjligt för dessa barn."
+    ],
+    [
+     "G21",
+     "Olovslundsskolans ledning kan sitta i sin tredje enhet, Nockebyhovsskolan där de är en gång i veckan idag. Pga minskat intag bör det finnas plats i de lokalerna."
+    ],
+    [
+     "C23",
+     "Anpassad grundskola: Påverkar enbart de elever som går åk 1-2 anpassad grundskola nu, resten hinner gå ut"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 567.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.1064102564102565,
+       "ledig": 213.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 557.0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 0.9936224489795918,
+       "ledig": 227.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1064102564102565,
+     "ledig": 440.0,
+     "behov": 518.0,
+     "kap_sum": 1564
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 557.0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 0.9882783882783883,
+       "ledig": 223.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 546.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.060131195335277,
+       "ledig": 238.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.060131195335277,
+     "ledig": 461.0,
+     "behov": 499.0,
+     "kap_sum": 1564
+    }
+   },
+   "max_bel": 1.1064102564102565,
+   "over_pp": -3.974820697509762
+  },
+  {
+   "nr": 6,
+   "namn": "Alternativ 6 2030 ABA + NE",
+   "blad": "2030, ABA & NE",
+   "start": 2030,
+   "notes": [
+    [
+     "C20",
+     "f-3 Abrahamsberg, 4-6 Nya Elementar"
+    ],
+    [
+     "J20",
+     "1-4 Abrahamsberg, f, 5-6 Nya elementar"
+    ],
+    [
+     "C22",
+     "3-6 abrahamsberg, f-2 Nya elementar"
+    ],
+    [
+     "J22",
+     "f, 4-6 Abrahamsberg"
+    ],
+    [
+     "B24",
+     "Anpassad grundskola: Påverkar enbart de elever som går åk 1-2 anpassad grundskola nu, resten hinner gå ut"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 567.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.1064102564102565,
+       "ledig": 213.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 947.0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 1.094569288389513,
+       "ledig": 121.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1064102564102565,
+     "ledig": 334.0,
+     "behov": 518.0,
+     "kap_sum": 1848
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 557.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.0796703296703296,
+       "ledig": 223.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 924.0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 1.0654093097913322,
+       "ledig": 144.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0796703296703296,
+     "ledig": 367.0,
+     "behov": 499.0,
+     "kap_sum": 1848
+    }
+   },
+   "max_bel": 1.1064102564102565,
+   "over_pp": -3.974820697509762
+  },
+  {
+   "nr": 7,
+   "namn": "Alternativ 7 2030 ABA + ÄV",
+   "blad": "2030, ABA & Äppelviken",
+   "start": 2030,
+   "notes": [
+    [
+     "B21",
+     "Anpassad grundskola: Påverkar enbart de elever som går åk 1-2 anpassad grundskola nu, resten hinner gå ut"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 567.0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 1.0115384615384615,
+       "ledig": 213.0
+      },
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 440.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.0823529411764705,
+       "ledig": 240.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0823529411764705,
+     "ledig": 453.0,
+     "behov": 518.0,
+     "kap_sum": 1460
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 557.0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 0.9882783882783883,
+       "ledig": 223.0
+      },
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 427.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.0472689075630253,
+       "ledig": 253.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0472689075630253,
+     "ledig": 476.0,
+     "behov": 499.0,
+     "kap_sum": 1460
+    }
+   },
+   "max_bel": 1.0823529411764705,
+   "over_pp": -6.380552220888358
+  },
+  {
+   "nr": 8,
+   "namn": "Alternativ 8 2030 NE+Paviljong",
+   "blad": "2030, NE & paviljong",
+   "start": 2030,
+   "notes": [
+    [
+     "C20",
+     "Specialsalar mm"
+    ],
+    [
+     "J20",
+     "Specialsalar mm"
+    ],
+    [
+     "C21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "J21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "C23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "J23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "C25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "J25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "C27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "J27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "C29",
+     "Ingen slöjd för barnen i Paviljongen"
+    ],
+    [
+     "J29",
+     "Slöjd: 1,25 timmar i veckan á 2-3 klasser = 2,5 - 3,75 timmar/veckan. Då går man 700 m till abrahamsberg"
+    ],
+    [
+     "B31",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 947.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.1638576779026217,
+       "ledig": 121.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 0.925,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1638576779026217,
+     "ledig": 361.0,
+     "behov": 518.0,
+     "kap_sum": 1308
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 924.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.1321562332798287,
+       "ledig": 144.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 0.8910714285714286,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1321562332798287,
+     "ledig": 384.0,
+     "behov": 499.0,
+     "kap_sum": 1308
+    }
+   },
+   "max_bel": 1.1638576779026217,
+   "over_pp": 1.7699214517267636
+  },
+  {
+   "nr": 9,
+   "namn": "Alternativ 9 2030 ABA+Paviljong",
+   "blad": "2030, ABA & paviljong",
+   "start": 2030,
+   "notes": [
+    [
+     "C20",
+     "Specialsalar mm"
+    ],
+    [
+     "J20",
+     "Specialsalar mm"
+    ],
+    [
+     "C21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "J21",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "C23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "J23",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "C25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "J25",
+     "Musik: i klassrummen"
+    ],
+    [
+     "C27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "J27",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "C29",
+     "Ingen slöjd för barnen i Paviljongen"
+    ],
+    [
+     "J29",
+     "Slöjd: 1,25 timmar i veckan á 2-3 klasser = 2,5 - 3,75 timmar/veckan. Då går man 700 m till abrahamsberg"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 567.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.1064102564102565,
+       "ledig": 213.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 0.925,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1064102564102565,
+     "ledig": 453.0,
+     "behov": 518.0,
+     "kap_sum": 1020
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 557.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.0796703296703296,
+       "ledig": 223.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 0.8910714285714286,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0796703296703296,
+     "ledig": 463.0,
+     "behov": 499.0,
+     "kap_sum": 1020
+    }
+   },
+   "max_bel": 1.1064102564102565,
+   "over_pp": -3.974820697509762
+  },
+  {
+   "nr": 10,
+   "namn": "Alternativ 10 2030 ÄV+Paviljong",
+   "blad": "2030, äppelviken & paviljong",
+   "start": 2030,
+   "notes": [
+    [
+     "C21",
+     "Specialsalar mm"
+    ],
+    [
+     "J21",
+     "Specialsalar mm"
+    ],
+    [
+     "C22",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "J22",
+     "Skolledning om trångt i nya skolorna: Nockebyhovsskolan, där ledningen redan sitter 1 gång/vecka"
+    ],
+    [
+     "C24",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "J24",
+     "Matsal: MatsalsPaviljong på Olovslundsskolans skolgård"
+    ],
+    [
+     "C26",
+     "Musik: i klassrummen"
+    ],
+    [
+     "J26",
+     "Musik: i klassrummen"
+    ],
+    [
+     "C28",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "J28",
+     "Idrott: på fotbollsplanen"
+    ],
+    [
+     "C30",
+     "Ingen slöjd för barnen i Paviljongen"
+    ],
+    [
+     "J30",
+     "Slöjd: 1,25 timmar i veckan á 2-3 klasser = 2,5 - 3,75 timmar/veckan. Då går man 700 m till abrahamsberg"
+    ],
+    [
+     "B32",
+     "Förslaget innebär att anpassad grundskola måste evakuera/stängas 2028"
+    ]
+   ],
+   "years": {
+    "2030": {
+     "ol": 518.0,
+     "per_ak": 74.0,
+     "skolor": [
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 440.0,
+       "ak": 4,
+       "evak": 296.0,
+       "bel": 1.0823529411764705,
+       "ledig": 240.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 222.0,
+       "bel": 0.925,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0823529411764705,
+     "ledig": 480.0,
+     "behov": 518.0,
+     "kap_sum": 920
+    },
+    "2031": {
+     "ol": 499.0,
+     "per_ak": 71.28571428571429,
+     "skolor": [
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 427.0,
+       "ak": 4,
+       "evak": 285.14285714285717,
+       "bel": 1.0472689075630253,
+       "ledig": 253.0
+      },
+      {
+       "skola": "Paviljong Åkeshovsvägen 7",
+       "kap": 240,
+       "ord": 0,
+       "ak": 3,
+       "evak": 213.85714285714286,
+       "bel": 0.8910714285714286,
+       "ledig": 240
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0472689075630253,
+     "ledig": 493.0,
+     "behov": 499.0,
+     "kap_sum": 920
+    }
+   },
+   "max_bel": 1.0823529411764705,
+   "over_pp": -6.380552220888358
+  },
+  {
+   "nr": 11,
+   "namn": "Alternativ 11 2032 ABA+NE",
+   "blad": "2032, ABA & NE",
+   "start": 2032,
+   "notes": [
+    [
+     "C21",
+     "f-3 Abrahamsberg, 4-6 Nya Elementar"
+    ],
+    [
+     "J21",
+     "1-4 Abrahamsberg, f, 5-6 Nya elementar"
+    ],
+    [
+     "C23",
+     "3-6 abrahamsberg, f-2 Nya elementar"
+    ],
+    [
+     "J23",
+     "f, 4-6 Abrahamsberg"
+    ],
+    [
+     "B25",
+     "Anpassad grundskola: Hinner fasas ut, inga barn blir utan skolplats"
+    ]
+   ],
+   "years": {
+    "2032": {
+     "ol": 490.0,
+     "per_ak": 70.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 550.0,
+       "ak": 4,
+       "evak": 280.0,
+       "bel": 1.064102564102564,
+       "ledig": 230.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 902.0,
+       "ak": 3,
+       "evak": 210.0,
+       "bel": 1.0411985018726593,
+       "ledig": 166.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.064102564102564,
+     "ledig": 396.0,
+     "behov": 490.0,
+     "kap_sum": 1848
+    },
+    "2033": {
+     "ol": 475.0,
+     "per_ak": 67.85714285714286,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 543.0,
+       "ak": 4,
+       "evak": 271.42857142857144,
+       "bel": 1.0441391941391942,
+       "ledig": 237.0
+      },
+      {
+       "skola": "Nya Elementar",
+       "kap": 1068,
+       "ord": 890.0,
+       "ak": 3,
+       "evak": 203.57142857142858,
+       "bel": 1.0239432851792403,
+       "ledig": 178.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0441391941391942,
+     "ledig": 415.0,
+     "behov": 475.0,
+     "kap_sum": 1848
+    }
+   },
+   "max_bel": 1.064102564102564,
+   "over_pp": -8.205589928279
+  },
+  {
+   "nr": 12,
+   "namn": "Alternativ 12 2032 ABA+ÅLSTEN",
+   "blad": "2032, ABA & Ålsten",
+   "start": 2032,
+   "notes": [
+    [
+     "G23",
+     "Det går lika bra att köra 2 årskurser i ålsten och 5 i Abrahamsberg"
+    ],
+    [
+     "B26",
+     "Anpassad grundskola: Hinner fasas ut, inga barn blir utan skolplats"
+    ]
+   ],
+   "years": {
+    "2032": {
+     "ol": 490.0,
+     "per_ak": 70.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 550.0,
+       "ak": 4,
+       "evak": 280.0,
+       "bel": 1.064102564102564,
+       "ledig": 230.0
+      },
+      {
+       "skola": "Ålstensskolan",
+       "kap": 476,
+       "ord": 337.0,
+       "ak": 3,
+       "evak": 210.0,
+       "bel": 1.1491596638655461,
+       "ledig": 139.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1491596638655461,
+     "ledig": 369.0,
+     "behov": 490.0,
+     "kap_sum": 1256
+    },
+    "2033": {
+     "ol": 475.0,
+     "per_ak": 67.85714285714286,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 543.0,
+       "ak": 4,
+       "evak": 271.42857142857144,
+       "bel": 1.0441391941391942,
+       "ledig": 237.0
+      },
+      {
+       "skola": "Ålstensskolan",
+       "kap": 476,
+       "ord": 331.0,
+       "ak": 3,
+       "evak": 203.57142857142858,
+       "bel": 1.1230492196878752,
+       "ledig": 145.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.1230492196878752,
+     "ledig": 382.0,
+     "behov": 475.0,
+     "kap_sum": 1256
+    }
+   },
+   "max_bel": 1.1491596638655461,
+   "over_pp": 0.30012004801920344
+  },
+  {
+   "nr": 13,
+   "namn": "Alternativ 13 2032 ABA+NÄ",
+   "blad": "2032, ABA & Norra Ä",
+   "start": 2032,
+   "notes": [
+    [
+     "B22",
+     "Anpassad grundskola: Hinner fasas ut, inga barn blir utan skolplats"
+    ]
+   ],
+   "years": {
+    "2032": {
+     "ol": 490.0,
+     "per_ak": 70.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 550.0,
+       "ak": 4,
+       "evak": 280.0,
+       "bel": 1.064102564102564,
+       "ledig": 230.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 531.0,
+       "ak": 3,
+       "evak": 210.0,
+       "bel": 0.9451530612244898,
+       "ledig": 253.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.064102564102564,
+     "ledig": 483.0,
+     "behov": 490.0,
+     "kap_sum": 1564
+    },
+    "2033": {
+     "ol": 475.0,
+     "per_ak": 67.85714285714286,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 543.0,
+       "ak": 4,
+       "evak": 271.42857142857144,
+       "bel": 1.0441391941391942,
+       "ledig": 237.0
+      },
+      {
+       "skola": "Norra Ängby skola",
+       "kap": 784,
+       "ord": 520.0,
+       "ak": 3,
+       "evak": 203.57142857142858,
+       "bel": 0.9229227405247813,
+       "ledig": 264.0
+      }
+     ],
+     "tot_ak": 7,
+     "max_bel": 1.0441391941391942,
+     "ledig": 501.0,
+     "behov": 475.0,
+     "kap_sum": 1564
+    }
+   },
+   "max_bel": 1.064102564102564,
+   "over_pp": -8.205589928279
+  },
+  {
+   "nr": 14,
+   "namn": "Alternativ 14 2032 ABA+ÄV",
+   "blad": "2032, ABA & Äppelviken",
+   "start": 2032,
+   "notes": [
+    [
+     "B21",
+     "Anpassad grundskola: Hinner fasas ut, inga barn blir utan skolplats"
+    ]
+   ],
+   "years": {
+    "2032": {
+     "ol": 490.0,
+     "per_ak": 70.0,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 550.0,
+       "ak": 3,
+       "evak": 210.0,
+       "bel": 0.9743589743589743,
+       "ledig": 230.0
+      },
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 420.0,
+       "ak": 4,
+       "evak": 280.0,
+       "bel": 1.0294117647058822,
+       "ledig": 260.0
+      }
+     ],
+     "tot_ak": 7,
+     "korrigerad": true,
+     "max_bel": 1.0294117647058822,
+     "ledig": 490.0,
+     "behov": 490.0,
+     "kap_sum": 1460
+    },
+    "2033": {
+     "ol": 475.0,
+     "per_ak": 67.85714285714286,
+     "skolor": [
+      {
+       "skola": "Abrahamsbergsskolan",
+       "kap": 780,
+       "ord": 543.0,
+       "ak": 3,
+       "evak": 203.57142857142858,
+       "bel": 0.9571428571428571,
+       "ledig": 237.0
+      },
+      {
+       "skola": "Äppelviksskolan",
+       "kap": 680,
+       "ord": 402.0,
+       "ak": 4,
+       "evak": 271.42857142857144,
+       "bel": 0.9903361344537815,
+       "ledig": 278.0
+      }
+     ],
+     "tot_ak": 7,
+     "korrigerad": true,
+     "max_bel": 0.9903361344537815,
+     "ledig": 515.0,
+     "behov": 475.0,
+     "kap_sum": 1460
+    }
+   },
+   "max_bel": 1.0294117647058822,
+   "over_pp": -11.674669867947184
+  }
+ ],
+ "bench": {
+  "2028": {
+   "kap": 476,
+   "ord": 393.0,
+   "evak": 152.57142857142858,
+   "bel": 1.146158463385354
+  },
+  "2029": {
+   "kap": 476,
+   "ord": 380.0,
+   "evak": 149.14285714285714,
+   "bel": 1.1116446578631451
+  },
+  "2030": {
+   "kap": 476,
+   "ord": 366.0,
+   "evak": 148.0,
+   "bel": 1.0798319327731092
+  },
+  "2031": {
+   "kap": 476,
+   "ord": 352.0,
+   "evak": 142.57142857142858,
+   "bel": 1.039015606242497
+  },
+  "2032": {
+   "kap": 476,
+   "ord": 337.0,
+   "evak": 140.0,
+   "bel": 1.0021008403361344
+  },
+  "2033": {
+   "kap": 476,
+   "ord": 331.0,
+   "evak": 135.71428571428572,
+   "bel": 0.9804921968787516
+  }
+ },
+ "BENCH": 1.146158463385354,
+ "OL": {
+  "2025": 495.0,
+  "2026": 516.0,
+  "2027": 533.0,
+  "2028": 534.0,
+  "2029": 522.0,
+  "2030": 518.0,
+  "2031": 499.0,
+  "2032": 490.0,
+  "2033": 475.0,
+  "2034": 460.0
+ },
+ "prog": {
+  "Abrahamsbergsskolan": {
+   "2025": 635.0,
+   "2026": 611.0,
+   "2027": 589.0,
+   "2028": 583.0,
+   "2029": 570.0,
+   "2030": 567.0,
+   "2031": 557.0,
+   "2032": 550.0,
+   "2033": 543.0,
+   "2034": 543.0
+  },
+  "Höglandsskolan": {
+   "2025": 455.0,
+   "2026": 435.0,
+   "2027": 422.0,
+   "2028": 401.0,
+   "2029": 368.0,
+   "2030": 341.0,
+   "2031": 327.0,
+   "2032": 316.0,
+   "2033": 308.0,
+   "2034": 300.0
+  },
+  "Nockebyhovsskolan": {
+   "2025": 87.0,
+   "2026": 89.0,
+   "2027": 97.0,
+   "2028": 94.0,
+   "2029": 94.0,
+   "2030": 91.0,
+   "2031": 85.0,
+   "2032": 86.0,
+   "2033": 85.0,
+   "2034": 87.0
+  },
+  "Norra Ängby skola": {
+   "2025": 672.0,
+   "2026": 667.0,
+   "2027": 660.0,
+   "2028": 627.0,
+   "2029": 589.0,
+   "2030": 557.0,
+   "2031": 546.0,
+   "2032": 531.0,
+   "2033": 520.0,
+   "2034": 497.0
+  },
+  "Nya Elementar": {
+   "2025": 1084.0,
+   "2026": 1033.0,
+   "2027": 992.0,
+   "2028": 977.0,
+   "2029": 959.0,
+   "2030": 947.0,
+   "2031": 924.0,
+   "2032": 902.0,
+   "2033": 890.0,
+   "2034": 895.0
+  },
+  "Olovslundsskolan": {
+   "2025": 495.0,
+   "2026": 516.0,
+   "2027": 533.0,
+   "2028": 534.0,
+   "2029": 522.0,
+   "2030": 518.0,
+   "2031": 499.0,
+   "2032": 490.0,
+   "2033": 475.0,
+   "2034": 460.0
+  },
+  "Smedslättsskolan": {
+   "2025": 397.0,
+   "2026": 376.0,
+   "2027": 367.0,
+   "2028": 351.0,
+   "2029": 337.0,
+   "2030": 319.0,
+   "2031": 303.0,
+   "2032": 290.0,
+   "2033": 284.0,
+   "2034": 274.0
+  },
+  "Södra Ängby skola": {
+   "2025": 813.0,
+   "2026": 802.0,
+   "2027": 774.0,
+   "2028": 744.0,
+   "2029": 736.0,
+   "2030": 727.0,
+   "2031": 728.0,
+   "2032": 727.0,
+   "2033": 728.0,
+   "2034": 731.0
+  },
+  "Vällingbyskolan": {
+   "2025": 739.0,
+   "2026": 679.0,
+   "2027": 666.0,
+   "2028": 652.0,
+   "2029": 632.0,
+   "2030": 615.0,
+   "2031": 596.0,
+   "2032": 582.0,
+   "2033": 573.0,
+   "2034": 570.0
+  },
+  "Ålstensskolan": {
+   "2025": 437.0,
+   "2026": 394.0,
+   "2027": 390.0,
+   "2028": 393.0,
+   "2029": 380.0,
+   "2030": 366.0,
+   "2031": 352.0,
+   "2032": 337.0,
+   "2033": 331.0,
+   "2034": 316.0
+  },
+  "Äppelviksskolan": {
+   "2025": 526.0,
+   "2026": 522.0,
+   "2027": 482.0,
+   "2028": 468.0,
+   "2029": 449.0,
+   "2030": 440.0,
+   "2031": 427.0,
+   "2032": 420.0,
+   "2033": 402.0,
+   "2034": 410.0
+  }
+ },
+ "issues": [
+  "Alt 14 2032: årskurser fördelade = 8, ska vara 7 (F–6).",
+  "Alt 14 2033: årskurser fördelade = 8, ska vara 7 (F–6)."
+ ]
+}

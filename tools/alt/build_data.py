@@ -178,7 +178,69 @@ T = dict(
                      f"Inget av föräldragruppens alternativ börjar före 2030 med Äppelviken."),
 )
 
-DATA = dict(asOf="2026-10-25", bench=BENCH, ol={str(k): v for k, v in OL.items()}, schools=SCHOOLS, alts=alts, chart=chart, text=T)
+# ---- Dokument (sidan "Dokument"). Filerna ligger i site/alternativ/dokument/ (se split_dokument.py). Sidantal och storlek läses från filerna.
+DOK = os.path.join(HERE, "..", "..", "site", "alternativ")
+
+
+def _doc(file, dnr, title, kind, issuer, date, note="", ext=False):
+    d = dict(dnr=dnr, title=title, kind=kind, issuer=issuer, date=date, note=note, file=file)
+    if file and not ext:
+        path = os.path.join(DOK, file)
+        d["bytes"] = os.path.getsize(path)
+        try:
+            from pypdf import PdfReader
+            d["pages"] = len(PdfReader(path).pages)
+        except Exception:
+            pass
+    return d
+
+
+DOCS = dict(
+    dnr=[
+        _doc("dokument/Dnr-2017-003560_Beslut_Miljo-och-halsoskyddsnamnden_2017-10-30.pdf", "2017-003560",
+             "Föreläggande om att inkomma med åtgärdsförslag avseende ventilation och buller, Olovslundsskolan, Penninglandet 2",
+             "Beslut", "Miljö- och hälsoskyddsnämnden", "2017-10-30"),
+        _doc("dokument/Dnr-UTBF-2023-7195_Tjansteutlatande_2025-05-21.pdf", "UTBF 2023/7195",
+             "Olovslundsskolan: Verksamhetsanpassningar i samband med underhåll. Förslag till reviderat inriktningsbeslut",
+             "Tjänsteutlåtande", "Utbildningsförvaltningen", "2025-05-21", "Till Utbildningsnämnden 2025-06-12."),
+        _doc("dokument/Dnr-SISAB-2025-234_Tjansteutlatande_2025-05-17.pdf", "SISAB 2025/234",
+             "Inriktningsbeslut ombyggnad kök och matsal samt underhåll hus A Olovslundsskolan, kv Olovsberg 11, Bromma",
+             "Tjänsteutlåtande", "Skolfastigheter i Stockholm AB (SISAB)", "2025-05-17"),
+        _doc("dokument/Dnr-2.6.3-2606-2018_Tjansteutlatande_2021-10-04.pdf", "2.6.3-2606/2018",
+             "Evakueringsskola med idrottstält i Västerort. Förslag till reviderat genomförandebeslut",
+             "Tjänsteutlåtande", "Utbildningsförvaltningen", "2021-10-04", "Till Utbildningsnämnden 2021-10-14."),
+        _doc("dokument/Dnr-UTBF-2022-240_Barnkonsekvensanalys-Matteusskolan_2025-05-28.pdf", "UTBF 2022/240",
+             "Barnkonsekvensanalys för Matteusskolan: underhåll och evakuering",
+             "Barnkonsekvensanalys", "Utbildningsförvaltningen", "2025-05-28"),
+        _doc("", "UTBF 2023/1126", "Vällingbyskolans ombyggnation",
+             "Hänvisas till i yrkandet", "", "", "Ingen fil är bifogad än."),
+    ],
+    other=[
+        _doc("dokument/Yttrande-och-yrkande_2026-10-14.pdf", "",
+             "Yttrande och yrkande angående evakuering av Olovslundsskolan: yrkande om återremiss",
+             "Yrkande", "Föräldragruppen", "2026-10-14", "Bilagorna är de handlingar med diarienummer ovan."),
+        _doc("dokument/Fragor-och-svar-del-2_2026-10-23.pdf", "",
+             "Frågor och svar, del 2: Olovslundsskolans renovering och evakuering",
+             "Frågor och svar", "Utbildningsförvaltningen, Grundskoleavdelningen", "2026-10-23"),
+        _doc("dokument/Barnkonsekvensanalys-AGR-Olovslundsskolan_enkat-vardnadshavare.pdf", "",
+             "Barnkonsekvensanalys för AGR Olovslundsskolan: enkät till vårdnadshavare",
+             "Enkät", "", "2026-10-22", "Utskrift av enkäten."),
+        _doc("dokument/Presentation-till-Olovslundsskolans-barn_sep-2026.pdf", "",
+             "Presentation till Olovslundsskolans barn: förslag kring flytt och renovering",
+             "Presentation", "", "September 2026", "Bilaga till yrkandet."),
+        _doc("dokument/Mejl-Mika-Metso_Aterkoppling-fran-presidiemotet_2026-09-17.pdf", "",
+             "Mejl från Mika Metso: Återkoppling från presidiemötet",
+             "Mejl", "Utbildningsförvaltningen", "2026-09-17", "Bilaga till yrkandet."),
+        _doc("/namnlista.pdf", "",
+             "Namnlista: Stoppa evakueringen av Olovslundsskolan till Vällingbyskolan",
+             "Namnlista", "Föräldragruppen", "", "Ligger på webbplatsens startnivå (/namnlista.pdf).", ext=True),
+        _doc("Alternativ-evakuering-Olovslundsskolan-A4-utkast-4.pdf", "",
+             "Alternativ till evakuering av Olovslundsskolan: de 14 alternativen",
+             "Beslutsunderlag, utkast 4", "Föräldragruppen", "2026-10-25"),
+    ],
+)
+
+DATA = dict(asOf="2026-10-25", bench=BENCH, ol={str(k): v for k, v in OL.items()}, schools=SCHOOLS, alts=alts, chart=chart, text=T, docs=DOCS)
 js = ("/* Genererad av tools/alt/build_data.py. Ändra inte för hand.\n"
       "   Källa: förvaltningens elevprognoser och kapacitet, omräknade och kontrollerade mot föräldragruppens arbetsblad.\n"
       "   Koordinater: SL:s platsuppslag 2026-10-20. Stadsdelsområde per skola enligt stadens indelning. */\n"

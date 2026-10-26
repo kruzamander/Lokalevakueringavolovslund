@@ -342,6 +342,7 @@
       tile("#/oversikt", "Alla alternativ på en sida", "11 av 14 ligger på eller under den beläggning förvaltningen själv accepterar.") +
       tile("#/jamforelse", "Åtta mått jämförda", "Förvaltningens förslag och föräldragruppens alternativ sida vid sida.") +
       tile("#/kommun", "Förvaltningens förslag", "Vällingby och Ålsten 2028–2030: elever, kostnad och karta.") +
+      tile("#/dokument", "Dokument", "Alla handlingar med diarienummer: länk till PDF eller ladda ned.") +
       tile("#/tidsfonster", "Tre tidsfönster", "Lediga platser ökar medan elevtalet minskar.") +
       tile("#/anpassad", "Anpassad grundskola", "Tidpunkten avgör vad som händer med de anpassade grupperna.") +
       tile("#/begaran", "Begäran och tidplan", "Utred fler alternativ innan beslutet i december.") +
@@ -690,10 +691,39 @@
       tile("#/begaran", "Begäran och tidplan", "Vad vi ber nämnden göra, och när.") +
       tile("#/las", "Läsanvisning", "Så läser du staplarna och begreppen.") +
       tile("#/utreda", "Att utreda vidare", "Åtta punkter för förvaltningen.") +
+      tile("#/dokument", "Dokument", "Handlingar med diarienummer, som PDF.") +
       tile("#/underlag", "Källor och antaganden", "Elevprognoser, kapacitet, FAQ 2 och vad som inte ingår.") +
       tile("#/karta", "Om kartan", "Resvägar, stadsdelsområden och koordinater.") +
       '<a class="tile" href="' + PDF + '" download><b>PDF</b><span>Hela underlaget, 15 sidor, utkast 2026-10-25.</span></a></div></div>';
   }
+  /* ---- dokument */
+  function fmtSize(b) { return b >= 1048576 ? dec(b / 1048576, 1) + NBSP + "MB" : Math.round(b / 1024) + NBSP + "kB"; }
+  function docRow(d) {
+    var meta = [d.kind, d.issuer, d.date].filter(Boolean).map(esc).join(" \u00b7 ");
+    var info = [];
+    if (d.pages) info.push(d.pages + NBSP + "sid");
+    if (d.bytes) info.push(fmtSize(d.bytes));
+    var acts = d.file
+      ? '<a class="btn small" href="' + esc(d.file) + '" target="_blank" rel="noopener">Öppna PDF</a>' +
+        '<a class="btn ghost small" href="' + esc(d.file) + '" download>Ladda ned</a>'
+      : '<span class="muted">Ingen fil</span>';
+    return '<li class="doc"><div class="doc-main">' +
+      (d.dnr ? '<span class="dnr">Dnr ' + esc(d.dnr) + "</span>" : '<span class="dnr none">Inget dnr</span>') +
+      '<h3>' + esc(d.title) + "</h3>" +
+      (meta ? '<p class="doc-meta">' + meta + (info.length ? " \u00b7 " + info.join(" \u00b7 ") : "") + "</p>" : "") +
+      (d.note ? '<p class="doc-note">' + esc(d.note) + "</p>" : "") +
+      '</div><div class="doc-acts">' + acts + "</div></li>";
+  }
+  function docsView() {
+    var K = D.docs, html = '<div class="page"><p class="kick">Dokument</p><h1>Handlingar och underlag</h1>' +
+      '<p class="lead">Alla handlingar med diarienummer (dnr) som ligger till grund för underlaget. Öppna som PDF eller ladda ned.</p>' +
+      '<h2>Handlingar med diarienummer</h2><ul class="docs">';
+    K.dnr.forEach(function (d) { html += docRow(d); });
+    html += '</ul><h2>Övriga handlingar</h2><ul class="docs">';
+    K.other.forEach(function (d) { html += docRow(d); });
+    return html + '</ul><p class="src">Handlingarna med diarienummer är bilagor till yttrandet och yrkandet 2026-10-14. Namnlistan i originalform, med e-postadresser, publiceras inte.</p></div>';
+  }
+
   function notFound() {
     return '<div class="page"><h1>Sidan finns inte</h1><p><a class="btn" href="#/">Till omslaget</a></p></div>';
   }
@@ -711,6 +741,7 @@
     utreda: { t: "Att utreda vidare", m: "mer", f: todoView },
     underlag: { t: "Källor och antaganden", m: "mer", f: sourcesView },
     karta: { t: "Om kartan", m: "mer", f: aboutMapView },
+    dokument: { t: "Dokument", m: "mer", f: docsView },
     mer: { t: "Underlag", m: "mer", f: moreView }
   };
   var SUFFIX = " · 14 alternativ, Olovslundsskolan";
